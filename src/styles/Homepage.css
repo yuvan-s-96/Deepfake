@@ -1,0 +1,34 @@
+.homepage-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage-content {
+  flex-grow: 1;
+  padding: 1rem;
+  text-align: center;
+}
+
+.homepage-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.homepage-description {
+  font-size: 1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .homepage-title {
+    font-size: 1.5rem;
+  }
+  
+  .homepage-description {
+    font-size: 0.9rem;
+  }
+}

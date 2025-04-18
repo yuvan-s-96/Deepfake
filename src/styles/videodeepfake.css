@@ -1,0 +1,429 @@
+/* Video Deepfake Responsive Styles */
+.video-deepfake-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f4f4;
+}
+
+.video-deepfake-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.video-deepfake-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.video-deepfake-header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.video-upload-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.file-upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.5rem;
+  border: 2px dashed #d32f2f;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-upload-label:hover {
+  background-color: #fff3f3;
+  border-color: #b71c1c;
+}
+
+.upload-icon {
+  width: 48px;
+  height: 48px;
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+.upload-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.upload-hint {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.file-input {
+  display: none;
+}
+
+.selected-file-name {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+}
+
+.file-name-highlight {
+  font-weight: 600;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.number-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.input-hint {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  padding-top: 1.5rem;
+}
+
+.checkbox-input {
+  width: 1rem;
+  height: 1rem;
+}
+
+.checkbox-label {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #b71c1c;
+}
+
+.submit-button.disabled {
+  background-color: #f5c6c6;
+  cursor: not-allowed;
+}
+
+.alert-container {
+  margin-top: 1rem;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.bg-error {
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+}
+
+.bg-success {
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+}
+
+.bg-info {
+  background-color: #e3f2fd;
+  border: 1px solid #bbdefb;
+}
+
+.bg-warning {
+  background-color: #fff8e1;
+  border: 1px solid #ffecb3;
+}
+
+.alert-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.alert-icon {
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.icon.error { color: #d32f2f; }
+.icon.success { color: #4caf50; }
+.icon.info { color: #2196f3; }
+
+.alert-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.alert-description {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.results-container {
+  margin-top: 2rem;
+}
+
+.result-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.result-prediction {
+  font-size: 1.1rem;
+}
+
+.result-fake {
+  font-weight: 700;
+  color: #d32f2f;
+}
+
+.result-real {
+  font-weight: 700;
+  color: #4caf50;
+}
+
+.result-highlight {
+  font-weight: 600;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.frame-analysis-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.frame-bars-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.frame-importance-bar {
+  margin-bottom: 0.5rem;
+}
+
+.frame-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.frame-label {
+  width: 4rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.frame-progress-bg {
+  flex: 1;
+  height: 0.75rem;
+  background-color: #eee;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.frame-progress {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.frame-value {
+  width: 3rem;
+  font-size: 0.8rem;
+  text-align: right;
+  color: #555;
+}
+
+.analysis-hint {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.frames-gallery-section {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.frames-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.frame-thumbnail {
+  border: 2px solid #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.frame-thumbnail.selected {
+  border-color: #d32f2f;
+}
+
+.frame-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.selected-frame-container {
+  margin-top: 1rem;
+}
+
+.frame-preview {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.frame-preview-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.frame-metadata {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.xai-visualizations-section {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.xai-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.xai-item {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.xai-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.xai-caption {
+  padding: 0.35rem;
+  font-size: 0.75rem;
+  text-align: center;
+  background-color: #f4f4f4;
+  border-top: 1px solid #eee;
+}
+
+@media screen and (max-width: 768px) {
+  .video-upload-card {
+    padding: 1.25rem;
+  }
+
+  .video-deepfake-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .file-upload-label {
+    padding: 1rem;
+  }
+
+  .upload-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .frames-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .xai-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .frames-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .xai-grid {
+    grid-template-columns: 1fr;
+  }
+}

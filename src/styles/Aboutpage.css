@@ -1,0 +1,122 @@
+.team-section .team-member {
+    text-align: center;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+  }
+  
+  .team-member-image-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  
+  .team-section .team-member-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .team-section .team-member:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: #ff4444;
+  }
+  
+  .team-section .team-member:hover .team-member-image {
+    transform: scale(1.1);
+  }
+  
+  .team-section .team-member::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(to right, 
+      #ff4444, #4444ff, #44ff44, #ffaa44, #ff4444
+    );
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+  
+  .team-section .team-member:hover::before {
+    opacity: 1;
+  }
+  
+  .team-section .team-member h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+  }
+  
+  .team-section .team-member h4 {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  .team-section .team-member:hover h3 {
+    color: #ff4444;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .team-section .team-member-image {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .team-section .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .team-section .col-md-4 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .team-section .col-md-4 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  .mission-section,
+.technology-section {
+  margin-top: 2rem;
+}
+
+.mission-section h2,
+.technology-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.tech-detail {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tech-detail h3 {
+  color: #ff4444;
+  margin-bottom: 1rem;
+}

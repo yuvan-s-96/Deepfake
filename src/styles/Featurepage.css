@@ -1,0 +1,187 @@
+/* Audio Deepfake Specific Styles */
+.feature-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  text-align: center;
+}
+
+.feature-content h1 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.feature-content > p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-content img {
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+input[type="file"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+  border-color: #ff4444;
+}
+
+button {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background-color: #ff1111;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.result-box {
+  max-width: 500px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fake-result {
+  background-color: #ffdddd;
+  border: 2px solid #ff4444;
+  color: #cc0000;
+}
+
+.real-result {
+  background-color: #ddffdd;
+  border: 2px solid #44ff44;
+  color: #008000;
+}
+
+.result-box h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.result-box p {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .feature-content {
+    padding: 15px 10px;
+  }
+
+  .feature-content h1 {
+    font-size: 1.5rem;
+  }
+
+  input[type="file"], 
+  button {
+    max-width: 100%;
+  }
+
+  .result-box {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+}
+/* Add to existing Featurepage.css */
+.spectrogram-section {
+  margin-top: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.spectrogram-image {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.spectral-features {
+  margin-top: 1.5rem;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.spectral-features table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.spectral-features td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.spectral-features td:first-child {
+  font-weight: 600;
+  color: #333;
+}
+
+.spectral-features td:last-child {
+  text-align: right;
+  color: #666;
+}
+.percentages-breakdown {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.percentages-breakdown h3 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.percentages-breakdown p {
+  margin: 0.25rem 0;
+  font-weight: 500;
+}

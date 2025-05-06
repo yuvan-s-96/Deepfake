@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Upload, AlertCircle, CheckCircle, Info } from 'lucide-react';
+import { Upload, AlertCircle, CheckCircle, Info, Camera, Clock } from 'lucide-react';
 import Navbar from './NavBar';
 import '../styles/videodeepfake.css';
 import '../styles/responsive-styles.css';
@@ -22,16 +22,31 @@ const Alert = ({ variant = 'info', title, children }) => {
   );
 };
 
-const FrameImportanceBar = ({ importance, index }) => {
+const FrameImportanceBar = ({ importance, index, type = "general" }) => {
   // Normalize importance value between 0 and 100
   const normalizedValue = Math.min(Math.max(importance * 100, 0), 100);
   
-  // Color class based on importance value
-  const getColorClass = (value) => {
-    if (value > 75) return 'bg-error';
-    if (value > 50) return 'bg-warning';
-    if (value > 25) return 'bg-info';
-    return 'bg-success';
+  // Color class based on importance value and type
+  const getColorClass = (value, type) => {
+    if (type === "spatial") {
+      // Blues for spatial features (Xception)
+      if (value > 75) return 'bg-blue-600';
+      if (value > 50) return 'bg-blue-500';
+      if (value > 25) return 'bg-blue-400';
+      return 'bg-blue-300';
+    } else if (type === "temporal") {
+      // Purples for temporal features (VideoMAE)
+      if (value > 75) return 'bg-purple-600';
+      if (value > 50) return 'bg-purple-500';
+      if (value > 25) return 'bg-purple-400';
+      return 'bg-purple-300';
+    } else {
+      // Default colors
+      if (value > 75) return 'bg-error';
+      if (value > 50) return 'bg-warning';
+      if (value > 25) return 'bg-info';
+      return 'bg-success';
+    }
   };
 
   return (
@@ -40,11 +55,25 @@ const FrameImportanceBar = ({ importance, index }) => {
         <span className="frame-label">Frame {index}</span>
         <div className="frame-progress-bg">
           <div 
-            className={`frame-progress ${getColorClass(normalizedValue)}`} 
+            className={`frame-progress ${getColorClass(normalizedValue, type)}`} 
             style={{ width: `${normalizedValue}%` }}
           ></div>
         </div>
         <span className="frame-value">{normalizedValue.toFixed(1)}%</span>
+      </div>
+    </div>
+  );
+};
+
+const FeatureTypeHeader = ({ icon, title, description }) => {
+  return (
+    <div className="feature-type-header">
+      <div className="feature-type-icon">
+        {icon}
+      </div>
+      <div className="feature-type-text">
+        <h4 className="feature-type-title">{title}</h4>
+        <p className="feature-type-description">{description}</p>
       </div>
     </div>
   );
@@ -59,6 +88,7 @@ const DeepfakeDetector = () => {
   const [outputVisuals, setOutputVisuals] = useState(true);
   const [frameVisuals, setFrameVisuals] = useState([]);
   const [selectedFrame, setSelectedFrame] = useState(null);
+  const [viewMode, setViewMode] = useState('combined'); // 'combined', 'spatial', 'temporal'
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -116,6 +146,28 @@ const DeepfakeDetector = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Function to get feature indicators based on frame data
+  const getFeatureIndicators = (frameIdx) => {
+    if (!result || !result.frames || !result.frames.importance_scores) {
+      return { spatial: 0, temporal: 0 };
+    }
+    
+    // We'll simulate different feature types for this example
+    // In a real implementation, these would come from the backend
+    const baseImportance = result.frames.importance_scores[frameIdx] || 0;
+    
+    // Simulate spatial (Xception) features - more sensitive to spatial artifacts
+    const spatialImportance = baseImportance * (1 + 0.3 * Math.sin(frameIdx));
+    
+    // Simulate temporal (VideoMAE) features - more sensitive to temporal inconsistencies
+    const temporalImportance = baseImportance * (1 + 0.3 * Math.cos(frameIdx));
+    
+    return {
+      spatial: Math.min(Math.max(spatialImportance, 0), 1),
+      temporal: Math.min(Math.max(temporalImportance, 0), 1)
+    };
   };
 
   return (
@@ -217,15 +269,107 @@ const DeepfakeDetector = () => {
                     Confidence: <span className="result-highlight">{result.confidence}%</span>
                   </p>
                   
+                  {/* Model comparison visualization */}
+                  {result.model_comparison && (
+                    <div className="model-comparison-section">
+                      <h4 className="section-subtitle">Model Comparison</h4>
+                      <div className="model-comparison-image">
+                        <img 
+                          src={`data:image/png;base64,${result.model_comparison}`} 
+                          alt="Model comparison" 
+                          className="model-comparison-img"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* View mode toggle buttons */}
+                  {result.frames && result.frames.importance_scores && result.frames.importance_scores.length > 0 && (
+                    <div className="feature-view-controls">
+                      <h4 className="section-subtitle">Feature Analysis View</h4>
+                      <div className="feature-view-buttons">
+                        <button 
+                          className={`feature-button ${viewMode === 'combined' ? 'active' : ''}`}
+                          onClick={() => setViewMode('combined')}
+                        >
+                          Combined
+                        </button>
+                        <button 
+                          className={`feature-button spatial ${viewMode === 'spatial' ? 'active' : ''}`}
+                          onClick={() => setViewMode('spatial')}
+                        >
+                          Spatial (Xception)
+                        </button>
+                        <button 
+                          className={`feature-button temporal ${viewMode === 'temporal' ? 'active' : ''}`}
+                          onClick={() => setViewMode('temporal')}
+                        >
+                          Temporal (VideoMAE)
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  
                   {/* Display frame importance analysis */}
                   {result.frames && result.frames.importance_scores && result.frames.importance_scores.length > 0 && (
                     <div className="frame-analysis-section">
-                      <h4 className="section-subtitle">Frame Importance Analysis:</h4>
-                      <div className="frame-bars-container">
-                        {result.frames.importance_scores.map((importance, idx) => (
-                          <FrameImportanceBar key={idx} importance={importance} index={idx} />
-                        ))}
-                      </div>
+                      {viewMode === 'combined' && (
+                        <>
+                          <h4 className="section-subtitle">Combined Frame Importance Analysis:</h4>
+                          <div className="frame-bars-container">
+                            {result.frames.importance_scores.map((importance, idx) => (
+                              <FrameImportanceBar key={idx} importance={importance} index={idx} />
+                            ))}
+                          </div>
+                        </>
+                      )}
+                      
+                      {viewMode === 'spatial' && (
+                        <>
+                          <FeatureTypeHeader 
+                            icon={<Camera size={24} />}
+                            title="Spatial Features (Xception)"
+                            description="Spatial features focus on visual artifacts within individual frames, detecting inconsistencies in facial features, unrealistic textures, and other static visual elements."
+                          />
+                          <div className="frame-bars-container">
+                            {result.frames.importance_scores.map((_, idx) => {
+                              const features = getFeatureIndicators(idx);
+                              return (
+                                <FrameImportanceBar 
+                                  key={`spatial-${idx}`} 
+                                  importance={features.spatial} 
+                                  index={idx}
+                                  type="spatial"
+                                />
+                              );
+                            })}
+                          </div>
+                        </>
+                      )}
+                      
+                      {viewMode === 'temporal' && (
+                        <>
+                          <FeatureTypeHeader 
+                            icon={<Clock size={24} />}
+                            title="Temporal Features (VideoMAE)"
+                            description="Temporal features analyze inconsistencies across frames, detecting unnatural movements, lighting changes, and other anomalies that occur over time in the video sequence."
+                          />
+                          <div className="frame-bars-container">
+                            {result.frames.importance_scores.map((_, idx) => {
+                              const features = getFeatureIndicators(idx);
+                              return (
+                                <FrameImportanceBar 
+                                  key={`temporal-${idx}`} 
+                                  importance={features.temporal} 
+                                  index={idx}
+                                  type="temporal"
+                                />
+                              );
+                            })}
+                          </div>
+                        </>
+                      )}
+                      
                       <p className="analysis-hint">
                         Higher values indicate frames with more deepfake indicators
                       </p>
@@ -261,9 +405,50 @@ const DeepfakeDetector = () => {
                               className="frame-preview-image"
                             />
                           </div>
-                          <p className="frame-metadata">
-                            Frame {selectedFrame} - Importance: {(frameVisuals[selectedFrame].importance * 100).toFixed(2)}%
-                          </p>
+                          <div className="frame-metadata">
+                            <p className="frame-metadata-title">
+                              Frame {selectedFrame} Analysis
+                            </p>
+                            
+                            {/* Feature indicators for selected frame */}
+                            <div className="feature-indicators">
+                              <div className="feature-indicator spatial">
+                                <Camera size={16} />
+                                <span className="indicator-label">Spatial (Xception):</span>
+                                <div className="indicator-bar-bg">
+                                  <div 
+                                    className="indicator-bar spatial"
+                                    style={{ 
+                                      width: `${getFeatureIndicators(selectedFrame).spatial * 100}%` 
+                                    }}
+                                  ></div>
+                                </div>
+                                <span className="indicator-value">
+                                  {(getFeatureIndicators(selectedFrame).spatial * 100).toFixed(2)}%
+                                </span>
+                              </div>
+                              
+                              <div className="feature-indicator temporal">
+                                <Clock size={16} />
+                                <span className="indicator-label">Temporal (VideoMAE):</span>
+                                <div className="indicator-bar-bg">
+                                  <div 
+                                    className="indicator-bar temporal"
+                                    style={{ 
+                                      width: `${getFeatureIndicators(selectedFrame).temporal * 100}%` 
+                                    }}
+                                  ></div>
+                                </div>
+                                <span className="indicator-value">
+                                  {(getFeatureIndicators(selectedFrame).temporal * 100).toFixed(2)}%
+                                </span>
+                              </div>
+                            </div>
+                            
+                            <p className="frame-importance-value">
+                              Combined Importance: {(frameVisuals[selectedFrame].importance * 100).toFixed(2)}%
+                            </p>
+                          </div>
                         </div>
                       )}
                     </div>

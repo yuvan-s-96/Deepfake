@@ -21,7 +21,7 @@ const AudioDeepfake = () => {
     ];
     const maxSize = 10 * 1024 * 1024; // 10MB
 
-    if (!allowedTypes.includes(selectedFile.type)) {
+    if (!selectedFile.includes && !allowedTypes.includes(selectedFile.type)) {
       setError('Invalid file type. Please upload WAV, MP3, or FLAC file.');
       return;
     }
@@ -32,6 +32,7 @@ const AudioDeepfake = () => {
     }
 
     setFile(selectedFile);
+    setError(null); // Clear any previous errors
   };
 
   const handleSubmit = async (event) => {
@@ -133,12 +134,25 @@ const AudioDeepfake = () => {
               )}
             </div>
 
-            {result.spectrogram && (
+            {/* Updated visualization section to match backend response structure */}
+            {result.visualizations && result.visualizations.spectrogram && (
               <div className="spectrogram-section">
                 <h2>Frequency Analysis</h2>
                 <img 
-                  src={`data:image/png;base64,${result.spectrogram}`} 
+                  src={`data:image/png;base64,${result.visualizations.spectrogram}`} 
                   alt="Audio Spectrogram" 
+                  className="spectrogram-image"
+                />
+              </div>
+            )}
+
+            {/* Added waveform visualization */}
+            {result.visualizations && result.visualizations.waveform && (
+              <div className="spectrogram-section">
+                <h2>Waveform Analysis</h2>
+                <img 
+                  src={`data:image/png;base64,${result.visualizations.waveform}`} 
+                  alt="Audio Waveform" 
                   className="spectrogram-image"
                 />
               </div>
@@ -153,6 +167,29 @@ const AudioDeepfake = () => {
                       <tr key={key}>
                         <td>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}:</td>
                         <td>{typeof value === 'number' ? value.toFixed(2) : value} Hz</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* Detailed results section */}
+            {result.detailed_results && result.detailed_results.length > 0 && (
+              <div className="spectral-features">
+                <h3>Detailed Classification Results</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Label</th>
+                      <th>Probability (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {result.detailed_results.map((item, index) => (
+                      <tr key={index}>
+                        <td>{item.label}</td>
+                        <td>{item.normalized_score.toFixed(2)}%</td>
                       </tr>
                     ))}
                   </tbody>

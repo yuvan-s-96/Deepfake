@@ -292,6 +292,17 @@
   transition: width 0.3s ease;
 }
 
+/* Added missing color classes */
+.bg-blue-600 { background-color: #1e40af; }
+.bg-blue-500 { background-color: #3b82f6; }
+.bg-blue-400 { background-color: #60a5fa; }
+.bg-blue-300 { background-color: #93c5fd; }
+
+.bg-purple-600 { background-color: #7e22ce; }
+.bg-purple-500 { background-color: #a855f7; }
+.bg-purple-400 { background-color: #c084fc; }
+.bg-purple-300 { background-color: #d8b4fe; }
+
 .frame-value {
   width: 3rem;
   font-size: 0.8rem;
@@ -359,6 +370,126 @@
   margin-top: 0.5rem;
 }
 
+.frame-metadata-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.frame-importance-value {
+  margin-top: 0.5rem;
+}
+
+/* Added missing feature indicator styles */
+.feature-indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.feature-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.indicator-label {
+  width: 8rem;
+  font-size: 0.8rem;
+}
+
+.indicator-bar-bg {
+  flex: 1;
+  height: 0.5rem;
+  background-color: #eee;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.indicator-bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.indicator-bar.spatial {
+  background-color: #3b82f6;
+}
+
+.indicator-bar.temporal {
+  background-color: #a855f7;
+}
+
+.indicator-value {
+  width: 4rem;
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+/* Added missing feature type header styles */
+.feature-type-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.feature-type-icon {
+  color: #555;
+  flex-shrink: 0;
+}
+
+.feature-type-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.feature-type-description {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Added missing feature view control styles */
+.feature-view-controls {
+  margin-top: 1rem;
+}
+
+.feature-view-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.feature-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.feature-button:hover {
+  background-color: #f0f0f0;
+}
+
+.feature-button.active {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}
+
+.feature-button.spatial.active {
+  background-color: #1e40af;
+  border-color: #1e40af;
+}
+
+.feature-button.temporal.active {
+  background-color: #7e22ce;
+  border-color: #7e22ce;
+}
+
 .xai-visualizations-section {
   margin-top: 1.5rem;
   padding-top: 1rem;
@@ -391,6 +522,23 @@
   border-top: 1px solid #eee;
 }
 
+/* Added missing model comparison section styles */
+.model-comparison-section {
+  margin-top: 1rem;
+}
+
+.model-comparison-image {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.model-comparison-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   .video-upload-card {
     padding: 1.25rem;
@@ -416,6 +564,14 @@
   .xai-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .feature-indicators {
+    flex-direction: column;
+  }
+  
+  .indicator-label {
+    width: 6rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -425,5 +581,9 @@
   
   .xai-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .feature-view-buttons {
+    flex-direction: column;
   }
 }

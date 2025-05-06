@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Upload, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { Upload, AlertCircle, CheckCircle, Loader2, Info } from 'lucide-react';
 import Navbar from './NavBar';
 import '../styles/imagedeepfake.css';
 import '../styles/responsive-styles.css';
@@ -35,17 +35,42 @@ const CustomSpinner = () => (
   </div>
 );
 
+const XAIVisualizationCard = ({ title, imageData }) => {
+  if (!imageData) return null;
+  
+  return (
+    <div className="xai-visualization-card">
+      <h4>{title}</h4>
+      <div className="xai-image-container">
+        <img src={`data:image/png;base64,${imageData}`} alt={title} />
+      </div>
+    </div>
+  );
+};
+
 const DeepfakeImageDetector = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [showXAIExplanation, setShowXAIExplanation] = useState(false);
+  
 
   const handleFileChange = (e) => {
     const uploadedFile = e.target.files[0];
-    setFile(uploadedFile);
-    setResult(null);
-    setError(null);
+    if (uploadedFile) {
+      setFile(uploadedFile);
+      setResult(null);
+      setError(null);
+      
+      // Create preview URL for selected image
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(uploadedFile);
+    }
   };
 
   const detectDeepfake = async () => {
@@ -56,6 +81,7 @@ const DeepfakeImageDetector = () => {
 
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('generate_xai', 'true'); // Request XAI visualizations
 
     setLoading(true);
     setError(null);
@@ -72,6 +98,10 @@ const DeepfakeImageDetector = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const toggleXAIExplanation = () => {
+    setShowXAIExplanation(!showXAIExplanation);
   };
 
   return (
@@ -103,6 +133,13 @@ const DeepfakeImageDetector = () => {
                       <p className="selected-file-name">Selected: {file.name}</p>
                     )}
                   </div>
+
+                  {previewUrl && (
+                    <div className="image-preview-container">
+                      <h3>Image Preview</h3>
+                      <img src={previewUrl} alt="Preview" className="image-preview" />
+                    </div>
+                  )}
 
                   <button 
                     onClick={detectDeepfake} 
@@ -140,9 +177,69 @@ const DeepfakeImageDetector = () => {
                     <div className="result-details">
                       <div className="confidence-breakdown">
                         <h3>Confidence Levels</h3>
-                        <p>Real Image: {result.confidence.real.toFixed(2)}%</p>
-                        <p>Fake Image: {result.confidence.fake.toFixed(2)}%</p>
+                        <div className="confidence-bars">
+                          <div className="confidence-bar-container">
+                            <span>Real: {result.confidence.real.toFixed(2)}%</span>
+                            <div className="confidence-bar">
+                              <div className="confidence-bar-fill real" style={{ width: `${result.confidence.real}%` }}></div>
+                            </div>
+                          </div>
+                          <div className="confidence-bar-container">
+                            <span>Fake: {result.confidence.fake.toFixed(2)}%</span>
+                            <div className="confidence-bar">
+                              <div className="confidence-bar-fill fake" style={{ width: `${result.confidence.fake}%` }}></div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
+                      
+                      {/* Display pixel distribution histogram */}
+                      {result.visualizations?.histogram && (
+                        <div className="image-analysis-section">
+                          <h3>Pixel Distribution Analysis</h3>
+                          <div className="visualization-image">
+                            <img src={`data:image/png;base64,${result.visualizations.histogram}`} alt="Pixel Distribution Histogram" />
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* XAI Visualizations */}
+                      {result.xai_visualizations && (
+                        <div className="xai-section">
+                          <div className="xai-header" onClick={toggleXAIExplanation}>
+                            <h3>Explainable AI Analysis <Info className="info-icon" size={18} /></h3>
+                            <button className="toggle-xai-button">
+                              {showXAIExplanation ? 'Hide Details' : 'Show Details'}
+                            </button>
+                          </div>
+                          
+                          {showXAIExplanation && (
+                            <div className="xai-explanation">
+                              <p>These visualizations highlight the areas of the image that most influenced the AI's decision:</p>
+                              <ul>
+                                <li><strong>Integrated Gradients:</strong> Shows which pixels were most important for the classification.</li>
+                                <li><strong>Grad-CAM:</strong> Highlights regions the AI focused on when making its decision.</li>
+                                <li><strong>Occlusion Analysis:</strong> Shows how prediction changes when different parts are blocked.</li>
+                              </ul>
+                            </div>
+                          )}
+                          
+                          <div className="xai-visualizations-grid">
+                            <XAIVisualizationCard 
+                              title="Integrated Gradients" 
+                              imageData={result.xai_visualizations.integrated_gradients} 
+                            />
+                            <XAIVisualizationCard 
+                              title="Grad-CAM" 
+                              imageData={result.xai_visualizations.grad_cam} 
+                            />
+                            <XAIVisualizationCard 
+                              title="Occlusion Analysis" 
+                              imageData={result.xai_visualizations.occlusion} 
+                            />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

@@ -5,6 +5,7 @@ import AboutPage from './components/AboutPage';
 import VideoDeepfake from './components/VideoDeepfake';
 import AudioDeepfake from './components/AudioDeepfake';
 import ImageDeepfake from './components/ImageDeepfake';
+import ContactPage from './components/ContactPage';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} /> 
           <Route path="/features/video-deepfake" element={<VideoDeepfake />} />
           <Route path="/features/audio-deepfake" element={<AudioDeepfake />} />
           <Route path="/features/image-deepfake" element={<ImageDeepfake />} />

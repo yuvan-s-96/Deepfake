@@ -1,10 +1,10 @@
 import React from 'react';
-import '../styles/copyright.css'; // Make sure the path matches your project structure
+import '../styles/copyright.css';
 
 const Copyright = () => {
   return (
     <footer className="copyright">
-      <p>© {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
+      <p>© {new Date().getFullYear()} Deepfake Detection Technology. All rights reserved.</p>
     </footer>
   );
 };

@@ -139,7 +139,7 @@ def convert_to_flac(input_path):
 
 @app.route('/detect-audio', methods=['POST'])
 def detect_audio():
-    audio_pipe = pipeline("audio-classification", model="MelodyMachine/Deepfake-audio-detection-V2")
+    audio_pipe = pipeline("audio-classification", model="Bisher/wav2vec2_ASV_deepfake_audio_detection")
     if 'file' not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
     

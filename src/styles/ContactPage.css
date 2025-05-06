@@ -1,0 +1,193 @@
+/* Contact Page Styles */
+.contact-page-wrapper {
+    padding-bottom: 60px; /* Add padding to account for fixed copyright footer */
+  }
+  
+  .contact-info-section {
+    margin-top: 2rem;
+  }
+  
+  .contact-info,
+  .contact-form-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+  
+  .contact-info:hover,
+  .contact-form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: #ff4444;
+  }
+  
+  .contact-info h2,
+  .contact-form-container h2,
+  .faq-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .contact-item {
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact-item h3 {
+    color: #ff4444;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Contact Form Styles */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #ff4444;
+    box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
+  }
+  
+  .submit-btn {
+    background: linear-gradient(to right, #ff4444, #ff6b6b);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+    margin-top: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(255, 68, 68, 0.2);
+  }
+  
+  .submit-btn:hover {
+    background: linear-gradient(to right, #e63e3e, #ff5a5a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 68, 68, 0.3);
+  }
+  
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+  
+  .form-success-message {
+    background-color: #dff2bf;
+    color: #4F8A10;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    animation: fadeIn 0.5s;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* FAQ Section Styles */
+  .faq-section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  
+  .faq-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .faq-item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+  
+  .faq-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: #ff4444;
+  }
+  
+  .faq-item h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .faq-item:hover h3 {
+    color: #ff4444;
+  }
+  
+  /* Ensure content doesn't get hidden behind the fixed copyright footer */
+  .contact-page-wrapper {
+    padding-bottom: 60px; /* Add padding to account for the fixed copyright footer */
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .contact-info,
+    .contact-form-container {
+      margin-bottom: 1rem;
+    }
+    
+    .faq-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .contact-info h2,
+    .contact-form-container h2,
+    .faq-section h2 {
+      font-size: 1.5rem;
+    }
+    
+    .form-group label {
+      font-size: 0.9rem;
+    }
+    
+    .submit-btn {
+      width: 100%;
+    }
+  }

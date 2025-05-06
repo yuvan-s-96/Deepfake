@@ -68,7 +68,7 @@ export default function ResponsiveNavbar() {
             label: 'Contact',
             icon: 'pi pi-envelope',
             to: '/contact',
-            // template: itemRenderer
+            template: itemRenderer
         }
     ];
 

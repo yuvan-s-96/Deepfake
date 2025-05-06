@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './NavBar';
+import Copyright from './CopyRight';
 import '../styles/Aboutpage.css';
 
 const About = () => {
@@ -44,7 +45,7 @@ const About = () => {
         
         <section className="about-section">
           <p>
-            Our mission is to combat the growing challenge of audio deepfakes by providing cutting-edge detection technology. 
+            Our mission is to combat the growing challenge of deepfakes by providing cutting-edge detection technology. 
             We leverage advanced machine learning algorithms to identify synthetic audio, image and video with high accuracy and reliability.
           </p>
         </section>
@@ -104,6 +105,7 @@ const About = () => {
           </div>
         </section>
       </div>
+      <Copyright />
     </div>
   );
 };

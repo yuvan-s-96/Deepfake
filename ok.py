@@ -10,16 +10,7 @@ import os
 
 # ✅ Paths to Pretrained Xception Models
 xception_model_paths = {
-    "dfdc": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_dfdc.pth",
-    "dfdc_seed25": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_dfdc_seed25.pth",
-    "celebdf": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_celebdf.pth",
-    "celebdf_seed25": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_celebdf_seed25.pth",
-    "uadfv": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_uadfv.pth",
-    "uadfv_seed25": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_uadfv_seed25.pth",
-    "dftimit_lq": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_dftimit_lq.pth",
-    "dftimit_lq_seed25": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_dftimit_lq_seed25.pth",
-    "dftimit_hq": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_dftimit_hq.pth",
-    "dftimit_hq_seed25": r"C:\Users\Yuvan Velkumar\Downloads\drive-download-20250227T132846Z-001\xception_dftimit_hq_seed25.pth"
+    #adjust these according to your model paths
 }
 
 # ✅ PositionalEncoding
